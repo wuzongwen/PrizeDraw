@@ -1,0 +1,61 @@
+﻿@using Model
+@model PagedList.IPagedList<Model.SysUser>
+@using PagedList.Mvc;
+@using Common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="weadmin-body">
+    <div class="layui-row">
+        已添加用户
+        <hr class="layui-bg-green">
+        <div class="layui-form-item">
+            @foreach (SysUser item in ViewData["datalist"] as List<SysUser>)
+            {
+               <div style="margin-right:10px;display:inline-block;">
+                   <span class="layui-btn layui-btn-normal layui-btn-xs">@item.UserName</span>
+                   <i class="layui-icon" style="cursor:pointer;" onclick="member_del(this,'@item.ID',@ViewBag.LibraryId)">&#xe640;</i>
+               </div>
+            }
+        </div>
+    </div>
+    未添加用户
+    <hr class="layui-bg-green">
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>用户类型</th>
+                <th>操作</th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@Html.Encode(item.SysUserRoles.FirstOrDefault(u => u.SysUserID == item.ID).SysRoleId == 1 ? "超级管理员" : "普通管理员")</td>
+                    <td class="td-manage">
+                        @if (item.IsEnable == 0)
+                        {
+                            <a title="添加" onclick="member_add(this,'@item.ID',@ViewBag.LibraryId)" href="javascript:;">
+                                <span class="layui-btn layui-btn-normal layui-btn-xs">添加</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a title="添加" href="javascript:;">
+                                <span class="layui-btn layui-btn-normal layui-btn-xs @Html.Encode(item.IsEnable == 0 ? " " : "layui-btn-disabled")">已停用</span>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="page" @Html.Encode(Model.TotalItemCount <= 10 ? "style=display:none" : " ")>
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("LibraryUser", new { id = @ViewBag.LibraryId, page })))
+        </div>
+    </div>
+</div>
+<script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Library/libraryuser/js"))" type="text/javascript" charset="utf-8"></script>

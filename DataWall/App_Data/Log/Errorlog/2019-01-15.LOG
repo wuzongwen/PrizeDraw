@@ -1,0 +1,46 @@
+﻿时间:2019-01-15 09:40:08,843日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 09:41:13,902日志内容:场馆添加失败:值不能为 null。
+参数名: String
+-----------------------------------------
+
+时间:2019-01-15 09:41:21,568日志内容:ip所在城市获取失败!远程服务器返回错误: (502) 错误的网关。
+-----------------------------------------
+
+时间:2019-01-15 09:41:52,398日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 09:42:09,233日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 10:00:47,769日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 10:00:50,567日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 10:04:08,998日志内容:奖项修改失败:An error occurred while starting a transaction on the provider connection. See the inner exception for details.
+-----------------------------------------
+
+时间:2019-01-15 10:05:15,339日志内容:奖项修改失败:The property 'ID' is part of the object's key information and cannot be modified. 
+-----------------------------------------
+
+时间:2019-01-15 10:06:26,478日志内容:奖项修改失败:The property 'ID' is part of the object's key information and cannot be modified. 
+-----------------------------------------
+
+时间:2019-01-15 11:35:00,905日志内容:ip所在城市获取失败!远程服务器返回错误: (502) 错误的网关。
+-----------------------------------------
+
+时间:2019-01-15 11:35:23,492日志内容:奖项修改失败:Attaching an entity of type 'Model.SysFile' failed because another entity of the same type already has the same primary key value. This can happen when using the 'Attach' method or setting the state of an entity to 'Unchanged' or 'Modified' if any entities in the graph have conflicting key values. This may be because some entities are new and have not yet received database-generated key values. In this case use the 'Add' method or the 'Added' entity state to track the graph and then set the state of non-new entities to 'Unchanged' or 'Modified' as appropriate.
+-----------------------------------------
+
+时间:2019-01-15 14:24:47,774日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 15:34:25,152日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+
+时间:2019-01-15 17:37:07,888日志内容:ip所在城市获取失败!未将对象引用设置到对象的实例。
+-----------------------------------------
+

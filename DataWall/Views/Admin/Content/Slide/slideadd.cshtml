@@ -1,0 +1,85 @@
+﻿@model Model.SysContent
+@using Model
+@using Common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="weadmin-body">
+    <form id="form1" class="layui-form">
+        <input type="hidden" name="MenuType" value="@ViewBag.MenuType" />
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本设置</li>
+                <li>奖项描述</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <!--tab1 content-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属活动</label>
+                        <div class="layui-input-block" style="max-width:240px">
+                            <select name="Library" id="Library" lay-verify="required" lay-filter="pid-select">
+                                @foreach (SysLibrary item in ViewData["datalist"] as List<SysLibrary>)
+                                {
+                                    <option value="@item.ID" data-level="1">@item.LibraryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">奖项名称</label>
+                        <div class="layui-input-block" style="max-width:500px">
+                            <input type="text" name="Title" lay-verify="required" jq-error="请输入标题" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">奖品图片</label>
+                        <input type="text" name="FilePath" id="FilePath" readonly lay-verify="UploadImg" jq-error="请上传图片" placeholder="请上传图片" autocomplete="off" class="layui-input layui-hide">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn" id="FileAdd">图片上传</button>
+                            <blockquote class="layui-elem-quote layui-quote-nm layui-hide" id="ImageList" style="margin-top: 10px;">
+                                预览图：
+                                <div class="layui-upload-list" id="demo2"></div>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-block" style="max-width:60px">
+                            <input type="text" name="Sort" lay-verify="number" value="0" onkeyup="value=value.replace(/[^\d]/g,'')" jq-error="请输入排序" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <!--//tab1 content-->
+                </div>
+                <div class="layui-tab-item">
+                    <!--tab3 content-->
+                    <div id="editor">
+                    </div>
+                    <textarea class="layui-hide" id="Describe" style="width:100%; height:200px;" name="Describe"></textarea>
+                    <!--//tab3 content-->
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="editTopic" lay-submit="" lay-filter="add">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary layui-hide">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/wangEditor/js"))" type="text/javascript" charset="utf-8"></script>
+<script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/slide/js"))" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    var text1 = document.getElementById('Describe');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        text1.value = encodeURIComponent(html);
+    }
+    // 使用 base64 保存图片
+    editor.customConfig.uploadImgShowBase64 = true;
+    editor.create();
+</script>

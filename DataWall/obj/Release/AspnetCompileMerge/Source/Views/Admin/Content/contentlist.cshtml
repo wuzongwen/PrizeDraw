@@ -1,0 +1,111 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Model.SysContent>
+@using Model
+@using Common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/PagedList/css"))">
+<div class="weadmin-nav">
+    <span class="layui-breadcrumb">
+        <a href="javascript:;">首页</a>
+        <a href="javascript:;">奖项管理</a>
+        <a>
+            <cite>@ViewBag.Tip</cite>
+        </a>
+    </span>
+    <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">&#xe669;</i>
+    </a>
+</div>
+<div class="weadmin-body">
+    <div class="layui-row">
+        @using (Html.BeginForm("ContentList", "Content", new { Type = ViewBag.MenuType }, FormMethod.Post, new { @class = "layui-form layui-col-md12 we-search", @id = "frmSearch" }))
+        {
+            <div class="layui-inline">
+                活动：
+            </div>
+            <div class="layui-input-inline" style="margin-top:-22px">
+                <select name="library">
+                    <option value="0">全部</option>
+                    @foreach (SysLibrary lib in ViewData["datalist"] as List<SysLibrary>)
+                    {
+                        <option value="@lib.ID">@lib.LibraryName</option>
+                    }
+                </select>
+            </div>
+            <div class="layui-inline">
+                奖项名称：
+            </div>
+                <div class="layui-inline">
+                    <input type="text" name="keyword" value="@ViewBag.keyword" autocomplete="off" class="layui-input">
+                </div>
+                <input type="hidden" name="page" value="1" />
+                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        }
+    </div>
+
+    <div class="weadmin-block">
+        <button class="layui-btn layui-btn-danger" onclick="delAll('@ViewBag.MenuType','@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)')"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="WeAdminShow('添加','@Url.Action(ViewBag.addAction,"Content",new { MenuType=ViewBag.MenuType })',800,570)"><i class="layui-icon"></i>添加</button>
+        <span class="fr" style="line-height:40px">共有数据：@ViewBag.DataCout 条</span>
+    </div>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th style="width:30px">
+                    <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                </th>
+                <th>标题</th>
+                <th>所属活动</th>
+                <th>排序</th>
+                <th>添加时间</th>
+                <th>状态</th>
+                <th>操作</th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='@item.ID'><i class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>@item.Title</td>
+                    @foreach (SysLibrary lib in ViewData["datalist"] as List<SysLibrary>)
+                    {
+                        if (item.SysLibraryId == lib.ID)
+                        {
+                            <td>@lib.LibraryName</td>
+                        }
+                    }
+                    <td>@item.Sort</td>
+                    <td>@item.CrateTime</td>
+                    <td class="td-status">
+                        <span class="layui-btn layui-btn-normal layui-btn-xs @Html.Encode(item.IsEnable == 0 ? " " : "layui-btn-disabled")">@Html.Encode(item.IsEnable == 0 ? "已启用" : "已停用")</span>
+                    </td>
+                    <td class="td-manage">
+                        <a onclick="member_stop(this,'@item.ID')" href="javascript:;" title="@Html.Encode(item.IsEnable == 0 ? "停用" : "启用")">
+                            <i class="layui-icon">@Html.Encode(item.IsEnable == 0 ? "✘" : "✔")</i>
+                        </a>
+                        <a title="编辑" onclick="WeAdminShow('编辑','@Url.Action(ViewBag.editAction, "Content", new { id = item.ID})',800,570)" href="javascript:;">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a title="删除" onclick="member_del(this,'@item.ID','@ViewBag.MenuType','@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)')" href="javascript:;">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.TotalItemCount > 10)
+    {
+        <div class="page">
+            <div>
+                @Html.PagedListPager(Model, page => Url.Action("ContentList", new { page }))
+            </div>
+        </div>
+    }
+</div>
+<input type="hidden" id="libraryId" value="@ViewBag.library" />
+<script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/list/js"))" type="text/javascript" charset="utf-8"></script>

@@ -1,0 +1,166 @@
+﻿@using Common
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Content/Admin/favicon.ico")" type="image/x-icon" />
+    <link rel="stylesheet" href="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/css/style.css"))" media="screen" type="text/css">
+    <!-- 内容更新模块开始 -->
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/jquery/js"))"></script>
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/SignalR/jquery.signalR-2.4.0.min.js"))"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+            $(function () {
+                //声明hub代理
+                var chat = $.connection.myHub;
+                //创建后端要调用的前端function
+                chat.client.sendAllMessage = function (message) {
+                    console.log("服务端群发消息:" + message);
+                };
+                //对应后端的SendMessage函数，消息接收函数
+                chat.client.sendMessage = function (message) {
+                    //更新类型 type 0:照片墙 1:风采展示 2:通知公告 3:客流
+                    var Json = JSON.parse(message);
+                    console.log("类型:" + Json.type + ";" + Json.msg);
+                };
+                chat.client.hello = function (message) {
+                    $('#discussion').append('<li><strong>服务器广播的消息：hello</strong></li>');
+                };
+                chat.client.isLogin = function (name, message) {
+                    console.log(name + message);;
+                };
+
+                $.connection.hub.start().done(function () {
+                    //发送上线信息
+                    chat.server.sendLogin("@ViewBag.Title");
+                });
+            });
+    </script>
+    <!-- 内容更新模块结束 -->
+    <link rel="stylesheet" href="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/css/responsive-tabs.css"))">
+    <style type="text/css">
+
+			/* Styles for demo page only - not required */
+			a { color: #0496b6}
+
+			h1, h2 { margin: 1em 0 1.5em 0; color: #0f556f}
+			.tabs h1, .tabs h2 { color: #333; margin-bottom: 1em;}
+			.tabs ul, .tabs ol, .tabs p { margin-top:0; padding-top: 1em;} 
+			.tabs ul li, .tabs ol li { margin-bottom: 0.5em;}
+
+			hgroup h1 { margin-bottom:0; margin-top:0; line-height: 1.2em;}
+
+			hgroup h2 { font-size: 1.1em; font-weight: normal; position: absolute; top: 16px; right:20px;}
+
+			.btn { display: block; float: left;  padding: 10px 15px; background: #0496b6; font-size: 1.5em; color: #fff; font-weight: bold; text-decoration: none; border-radius: 5px;  text-align: center; box-shadow: 2px 2px 2px #eee;}
+			.btn:hover { background: #3cb7d3}
+			.clearfix {
+			  *zoom: 1;
+			}
+
+			.clearfix:before,
+			.clearfix:after {
+			  display: table;
+			  content: "";
+			}
+
+			.clearfix:after {
+			  clear: both;
+			}
+			p.demo-intro { font-size: 1.2em; margin-bottom: -0.5em; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+    <div class="responsive-tabs luck-back">
+
+        <h2>Key features</h2>
+        <div>
+
+                <div style="margin-top:15%;margin-left:8%"><img id="qrcode" src="@Url.Action("CreateQrCode", new { PrizeDrawCode = ViewBag.PrizeDrawCode })" /></div>
+                <div style="margin-left:15%" class="luck-content ce-pack-end">
+                    <div id="luckuser" class="slotMachine">
+                        <div class="slot">
+                            <span class="name">姓名</span>
+                        </div>
+                    </div>
+                    <div class="luck-content-btn">
+                        <a id="start" class="start" onclick="start()">开始</a>
+                    </div>
+                    <div class="luck-user">
+                        <div class="luck-user-title">
+                            <span>中奖名单</span>
+                        </div>
+                        <ul class="luck-user-list"></ul>
+                        <div class="luck-user-btn">
+                            <a href="#">中奖人</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <h2>How to use</h2>
+        <div>
+
+        </div>
+
+        <h2>Download</h2>
+        <div>
+
+        </div>
+    </div>
+    
+
+    <script>
+            var xinm = new Array();
+            var phone = new Array();
+            var openid = new Array();
+            $.ajax({
+                type: 'post',
+                url: '/Home/GetUsers',
+                dataType: 'json',
+                async: false,
+                data: {
+                    PrizeDrawCode: "@ViewBag.PrizeDrawCode"
+                },
+                success: function (msg) {
+                    var code = msg.code;
+                    switch (code) {
+                        case '200':
+                            for (let i in msg.data.xinm) {
+                                xinm.push(msg.data.xinm[i]);
+                            }
+                            for (let i in msg.data.phone) {
+                                phone.push(msg.data.phone[i]);
+                            }
+                            for (let i in msg.data.openid) {
+                                openid.push(msg.data.openid[i]);
+                            }
+                            console.log(xinm.length);
+                            break;
+                    }
+                    return false;
+                }
+            });
+            var nametxt = $('.slot');
+            var phonetxt = $('.name');
+            var pcount = xinm.length;//参加人数
+            var runing = true;
+            var trigger = true;
+            var inUser = (Math.floor(Math.random() * 10000)) % 5 + 1;
+            var num = 0;
+            var Lotterynumber = 1; //设置单次抽奖人数
+    </script>
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/js/Luckdraw.js"))" type="text/javascript"></script>
+    <div style="text-align:center;">
+    </div>
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/js/responsiveTabs.js"))"></script>
+    <script>
+            $(document).ready(function () {
+                RESPONSIVEUI.responsiveTabs();
+            })
+    </script>
+</body>
+</html>

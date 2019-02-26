@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<Model.SysUser>
+@using PagedList.Mvc;
+@using Common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/PagedList/css"))">
+<div class="weadmin-nav">
+    <span class="layui-breadcrumb">
+        <a href="javascript:;">首页</a>
+        <a href="javascript:;">系统设置</a>
+        <a>
+            <cite>管理员列表</cite>
+        </a>
+    </span>
+    <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">&#xe669;</i>
+    </a>
+</div>
+<div class="weadmin-body">
+    <div class="layui-row">
+    </div>
+    <div class="weadmin-block">
+        <button class="layui-btn layui-btn-danger" onclick="delAll('@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)')"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="WeAdminShow('添加用户','/User/UserAdd',550,360)"><i class="layui-icon"></i>添加</button>
+        <span class="fr" style="line-height:40px">共有数据：@ViewBag.DataCout 条</span>
+    </div>
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th style="width:30px">
+                    <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                </th>
+                <th>登录名</th>
+                <th>角色</th>
+                <th>添加时间</th>
+                <th>状态</th>
+                <th>操作</th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='@item.ID'><i class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>@item.UserName</td>
+                    @foreach (var role in item.SysUserRoles)
+                    {
+                        <td>@role.SysRole.RoleDesc</td>
+                    }
+                    <td>@item.CrateTime</td>
+                    <td class="td-status">
+                        <span class="layui-btn layui-btn-normal layui-btn-xs @Html.Encode(item.IsEnable == 0 ? " " : "layui-btn-disabled")">@Html.Encode(item.IsEnable == 0 ? "已启用" : "已停用")</span>
+                    </td>
+                    <td class="td-manage">
+                        <a onclick="member_stop(this,'@item.ID')" href="javascript:;" title="@Html.Encode(item.IsEnable == 0 ? "停用" : "启用")">
+                            <i class="layui-icon">@Html.Encode(item.IsEnable == 0 ? "✘" : "✔")</i>
+                        </a>
+                        <a title="编辑" onclick="WeAdminShow('编辑','@Url.Action("UserEdit", "User", new { id = item.ID })',550,360)" href="javascript:;">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a title="删除" onclick="member_del(this,'@item.ID','@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)')" href="javascript:;">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.TotalItemCount > 10)
+    {
+        <div class="page">
+            <div>
+                @*每页 @Model.PageSize 条记录，共有 @Model.TotalItemCount 条记录。第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页，共 @Model.PageCount 页。*@
+                @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+            </div>
+        </div>
+    }
+</div>
+<script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/User/list/js"))" type="text/javascript" charset="utf-8"></script>

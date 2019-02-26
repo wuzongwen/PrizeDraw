@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>上业科技抽奖管理平台</title>
+    <meta name="description" content="上业科技抽奖管理平台">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" href="@Url.Content("~/Content/Admin/favicon.ico")" type="image/x-icon" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/Admin/static/css/font.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/Admin/static/css/weadmin.css")">
+    <script src="@Url.Content("~/Content/layui/js")" charset="utf-8"></script>
+    <script type="text/javascript">
+        layui.extend({
+            admin: '@Url.Content("~/Content/Admin/static/js/admin")'
+        });
+    </script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

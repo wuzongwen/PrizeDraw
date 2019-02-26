@@ -1,0 +1,134 @@
+﻿@using Model
+@model PrizeDraw.ViewModels.SystemInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="weadmin-body">
+    <div class="layui-col-lg12 layui-collapse" style="border: none;">
+        <div class="layui-col-lg6 layui-col-md12">
+            <!--信息展示-->
+            <fieldset class="layui-elem-field" style="padding: 5px;">
+                <!--系统公告-->
+                <div class="layui-card">
+                    <div class="layui-card-header layui-elem-quote">系统日志</div>
+                    <div class="layui-card-body">
+                        <div class="layui-carousel weadmin-notice" lay-filter="notice" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 280px;">
+                            <div carousel-item="">
+                                @foreach (SysLog lib in ViewData["datalist"] as List<SysLog>)
+                                {
+                                    <div class="">
+                                        @{
+                                            switch (lib.Type)
+                                            {
+                                                case 1:
+                                                    <a href="javascript:;" class="layui-bg-green">用户:@(lib.UserName)于@(lib.CrateTime)@lib.Details</a>
+                                                    break;
+                                                case 2:
+                                                    <a href="javascript:;" class="layui-bg-blue">用户:@(lib.UserName)于@(lib.CrateTime)@lib.Details</a>
+                                                    break;
+                                                case 3:
+                                                    <a href="javascript:;" class="layui-bg-red">用户:@(lib.UserName)于@(lib.CrateTime)@lib.Details</a>
+                                                    break;
+                                            }
+                                        }
+                                    </div>
+                                 }
+                            </div>
+                            <div class="layui-carousel-ind">
+                                <ul>
+                                    <li class="layui-this"></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    上海上业信息科技股份有限公司
+                    <i class="layui-icon" style="color: #FF5722;">&#xe756;</i>
+                </div>
+                <div class="layui-card-body layui-text weadmin-text">
+                    上业科技成立于2007年，是一家集开发、加工、代理、销售为一体的高新企业，主要业务有电子资源、软件开发和新媒体应用，向教育行业提供信息资源解决方案及全方位技术与咨询服务。
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-lg6 layui-col-md12">
+            <!--<legend>信息统计</legend>-->
+            <blockquote class="layui-elem-quote font16">服务器信息</blockquote>
+            <div class="">
+                <table class="layui-table">
+                    <tbody>
+                        <tr>
+                            <th width="30%">软件版本</th>
+                            <td><span id="lbServerName">@ViewBag.ProgramVersion</span></td>
+                        </tr>
+                        <tr>
+                            <th width="30%">服务器系统版本</th>
+                            <td><span id="lbServerName">@Model.ServerVersion</span></td>
+                        </tr>
+                        <tr>
+                            <td>服务器IIS版本</td>
+                            <td>@Model.IISVersion</td>
+                        </tr>
+                        <tr>
+                            <td>服务器区域语言 </td>
+                            <td>@Model.ServerLanguage</td>
+                        </tr>
+                        <tr>
+                            <td>服务器CPU核心数</td>
+                            <td>@Model.CpuNumber</td>
+                        </tr>
+                        <tr>
+                            <td>.NET版本信息</td>
+                            <td>@Model.DotNetVersion</td>
+                        </tr>
+                        <tr>
+                            <td>程序路径</td>
+                            <td>@Model.AbsolutePath</td>
+                        </tr>
+                        <tr>
+                            <td>程序所在磁盘剩余空间</td>
+                            <td>@Model.HardDiskFreeSpace</td>
+                        </tr>
+                        <tr>
+                            <td>系统运行时间</td>
+                            <td>@(ViewBag.Time)小时</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;overflow: hidden; margin-top: 10px;">
+        <blockquote class="layui-elem-quote">
+            上海上业信息科技股份有限公司
+        </blockquote>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['jquery', 'element', 'util', 'admin', 'carousel'], function () {
+        var element = layui.element,
+            $ = layui.jquery,
+            carousel = layui.carousel,
+            util = layui.util,
+            admin = layui.admin;
+        //建造实例
+        carousel.render({
+            elem: '.weadmin-shortcut'
+            , width: '100%' //设置容器宽度
+            , arrow: 'none' //始终显示箭头
+            , trigger: 'hover'
+            , autoplay: false
+        });
+
+        carousel.render({
+            elem: '.weadmin-notice'
+            , width: '100%' //设置容器宽度
+            , arrow: 'none' //始终显示箭头
+            , trigger: 'hover'
+            , autoplay: true
+        });
+    });
+</script>

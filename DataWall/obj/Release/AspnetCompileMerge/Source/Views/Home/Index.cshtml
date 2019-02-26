@@ -1,0 +1,99 @@
+﻿@using Common
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Content/Admin/favicon.ico")" type="image/x-icon" />
+    <link rel="stylesheet" href="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/css/style.css"))" media="screen" type="text/css">
+    <!-- 内容更新模块开始 -->
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/jquery/js"))"></script>
+    <script src="@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/SignalR/jquery.signalR-2.4.0.min.js"))"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+            $(function () {
+                //声明hub代理
+                var chat = $.connection.myHub;
+                //创建后端要调用的前端function
+                chat.client.sendAllMessage = function (message) {
+                    console.log("服务端群发消息:" + message);
+                };
+                //对应后端的SendMessage函数，消息接收函数
+                chat.client.sendMessage = function (message) {
+                    //更新类型 type 0:照片墙 1:风采展示 2:通知公告 3:客流
+                    var Json = JSON.parse(message);
+                    console.log("类型:" + Json.type + ";" + Json.msg);
+                };
+                chat.client.hello = function (message) {
+                    $('#discussion').append('<li><strong>服务器广播的消息：hello</strong></li>');
+                };
+                chat.client.isLogin = function (name, message) {
+                    console.log(name + message);;
+                };
+
+                $.connection.hub.start().done(function () {
+                    //发送上线信息
+                    chat.server.sendLogin("@ViewBag.Title");
+                });
+            });
+    </script>
+    <!-- 内容更新模块结束 -->
+</head>
+<body>
+    <div class='luck-back'>
+        <img id="qrcode" src="@Url.Action("CreateQrCode", new { PrizeDrawCode = ViewBag.PrizeDrawCode })" />
+        <div class="luck-content ce-pack-end">
+            <div id="luckuser" class="slotMachine">
+                <div class="slot">
+                    <span class="name">姓名</span>
+                </div>
+            </div>
+            <div class="luck-content-btn">
+                <a id="start" class="start" onclick="start()">开始</a>
+            </div>
+            <div class="luck-user">
+                <div class="luck-user-title">
+                    <span>中奖名单</span>
+                </div>
+                <ul class="luck-user-list"></ul>
+                <div class="luck-user-btn">
+                    <a href="#">中奖人</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var xinm = new Array();
+        xinm[0] = "Content/Home/img/1.jpg"
+        xinm[1] = "Content/Home/img/2.jpg"
+        xinm[2] = "Content/Home/img/3.jpg"
+        xinm[3] = "Content/Home/img/4.jpg"
+        xinm[4] = "Content/Home/img/5.jpg"
+        xinm[5] = "Content/Home/img/6.jpg"
+        xinm[6] = "Content/Home/img/1.jpg"
+        xinm[7] = "Content/Home/img/2.jpg"
+        xinm[8] = "Content/Home/img/3.jpg"
+        xinm[9] = "Content/Home/img/4.jpg"
+        xinm[10] = "Content/Home/img/5.jpg"
+        xinm[11] = "Content/Home/img/6.jpg"
+
+        var phone = new Array();
+        phone[0] = "张三"
+        phone[1] = "李四"
+        phone[2] = "王二麻"
+        phone[3] = "赵钱"
+        phone[4] = "孙丽"
+        phone[5] = "周五"
+        phone[6] = "郑旺"
+        phone[7] = "李二蛋"
+        phone[8] = "苟云强"
+        phone[9] = "德玛西亚"
+        phone[10] = "无知小辈"
+        phone[11] = "郝强"
+    </script>
+    <script src='@HtmlHelperExtend.GetCssJsUrl(Url.Content("~/Content/Home/js/Luckdraw.js"))' type="text/javascript"></script>
+    <div style="text-align:center;">
+    </div>
+</body>
+</html>

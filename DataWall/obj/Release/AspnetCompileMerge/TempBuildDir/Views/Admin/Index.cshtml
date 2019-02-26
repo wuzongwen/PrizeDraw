@@ -1,0 +1,145 @@
+﻿@using Model
+@model Model.SysProgramInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- 顶部开始 -->
+<div class="container">
+    <div class="logo">
+        <a href="@Url.Action("/Index")">上业科技抽奖管理平台</a>
+    </div>
+    <div class="left_open">
+        <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+    </div>
+    <ul class="layui-nav left fast-add" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">+新增</a>
+            <dl class="layui-nav-child">
+                <!-- 二级菜单 -->
+                @foreach (SysMenu menu in ViewData["datalist"] as List<SysMenu>)
+                {
+                    switch (menu.ContentType)
+                    {
+                        case 0:
+                            <dd>
+                                <a onclick="WeAdminShow('添加内容','@Url.Action("SlideAdd", "Content",new { MenuType=menu.ContentType})',800,570)"><i class="iconfont">&#xe6a2;</i>@menu.MenuName</a>
+                            </dd>
+                            break;
+                        case 1:
+                            <dd>
+                                <a onclick="WeAdminShow('添加内容','@Url.Action("VideoAdd", "Content",new { MenuType=menu.ContentType})',800,570)"><i class="iconfont">&#xe6a2;</i>@menu.MenuName</a>
+                            </dd>
+                            break;
+                        case 2:
+                            <dd>
+                                <a onclick="WeAdminShow('添加内容','@Url.Action("NoticeAdd", "Content",new { MenuType=menu.ContentType})',800,570)"><i class="iconfont">&#xe6a2;</i>@menu.MenuName</a>
+                            </dd>
+                            break;
+                    }
+                }
+                <dd>
+                    <a onclick="WeAdminShow('添加用户','/User/UserAdd',550,360)"><i class="iconfont">&#xe6b8;</i>用户</a>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+    <ul class="layui-nav right" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">@ViewBag.UserName</a>
+            <dl class="layui-nav-child">
+                <!-- 二级菜单 -->
+                <dd>
+                    <a onclick="WeAdminShow('修改密码','@Url.Action("PwdEdit", "User", new { UserName = ViewBag.UserName })',550,360)">修改密码</a>
+                </dd>
+                <dd>
+                    <a class="loginout" href="@Url.Action("LoginOut")">退出</a>
+                </dd>
+            </dl>
+        </li>
+        @*<li class="layui-nav-item to-index">
+                <a href="@Url.Action("Index","Home")" target="_blank">前台首页</a>
+            </li>*@
+    </ul>
+</div>
+<!-- 顶部结束 -->
+<!-- 中部开始 -->
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon">&#xe716;</i>
+                    <cite>系统设置</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="@Url.Action("List","User")">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>管理员列表</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="@Url.Action("List","Library")">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>活动管理</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe705;</i>
+                    <cite>奖项管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    @foreach (SysMenu menu in ViewData["datalist"] as List<SysMenu>)
+                    {
+                        <li>
+                            <a _href="@Url.Action("ContentList", "Content",new { Type=menu.ContentType})">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>@menu.MenuName</cite>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- <div class="x-slide_left"></div> -->
+<!-- 左侧菜单结束 -->
+<!-- 右侧主体开始 -->
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="wenav_tab" id="WeTabTip" lay-allowclose="true">
+        <ul class="layui-tab-title" id="tabName">
+            <li>我的桌面</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src='/Admin/Welcome' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-bg"></div>
+<!-- 右侧主体结束 -->
+<!-- 中部结束 -->
+<!-- 底部开始 -->
+<div class="footer">
+    <div class="copyright">Copyright ©2018 PrizeDraw All Rights Reserved</div>
+</div>
+<!-- 底部结束 -->
+<script type="text/javascript">
+    layui.config({
+    }).use('admin');
+</script>
+<!--Tab菜单右键弹出菜单-->
+<ul class="rightMenu" id="rightMenu">
+    <li data-type="fresh">刷新</li>
+    <li data-type="current">关闭当前</li>
+    <li data-type="other">关闭其它</li>
+    <li data-type="all">关闭所有</li>
+</ul>

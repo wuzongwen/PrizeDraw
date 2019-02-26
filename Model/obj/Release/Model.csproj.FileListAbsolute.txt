@@ -1,0 +1,16 @@
+F:\学习\DataWall\Model\bin\Release\Model.dll
+F:\学习\DataWall\Model\bin\Release\Model.pdb
+F:\学习\DataWall\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+F:\学习\DataWall\Model\obj\Release\Model.dll
+F:\学习\DataWall\Model\obj\Release\Model.pdb
+F:\学习\DataWall\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+F:\学习\DataWall\Model\bin\Release\Newtonsoft.Json.dll
+F:\学习\DataWall\Model\bin\Release\Newtonsoft.Json.xml
+F:\学习\抽奖\Model\bin\Release\Model.dll
+F:\学习\抽奖\Model\bin\Release\Model.pdb
+F:\学习\抽奖\Model\bin\Release\Newtonsoft.Json.dll
+F:\学习\抽奖\Model\bin\Release\Newtonsoft.Json.xml
+F:\学习\抽奖\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+F:\学习\抽奖\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+F:\学习\抽奖\Model\obj\Release\Model.dll
+F:\学习\抽奖\Model\obj\Release\Model.pdb

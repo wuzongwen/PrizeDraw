@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .wrap {
+        margin: 0 auto 0;
+        width: 386px;
+        padding: 18% 0 0
+    }
+
+    td {
+        text-align: left;
+        padding: 2px 10px;
+    }
+
+        td.header {
+            font-size: 22px;
+            padding-bottom: 10px;
+            color: #000;
+        }
+
+        td.check-info {
+            padding-top: 20px;
+        }
+
+    a {
+        color: #328ce5;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+<script src="@Url.Content("~/Content/jquery/js")" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $.fn.jcountdown = function (count, options) { var zCount = count; var defaults = { timeup: function () { } }; var opts = $.extend(defaults, options); var $timeDiv = $(this); var timeOut = function () { $timeDiv.text(zCount); zCount--; if (zCount >= 0) { setTimeout(timeOut, 1000); } else { opts.timeup(); } }; timeOut(); };
+</script>
+<div class="wrap">
+    <table>
+        <tr>
+            <td rowspan="5" style=""><img src="@Url.Content("~/Content/Admin/static/images/error.jpg")" alt="登录超时"></td>
+            <td class="header">登录超时</td>
+        </tr>
+        <tr><td><a href="javascript:top.location.href='@Url.Content("~/Admin/login")'"><span id="numDiv"></span>秒后系统会自动跳转，也可点击此处直接跳</a></td></tr>
+    </table>
+</div>
+<script type="text/javascript">
+        $("#numDiv").jcountdown(3, { timeup: function () { top.location.href = "@Url.Content("~/Admin/login")"; } });//倒计时3秒
+</script>

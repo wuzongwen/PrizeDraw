@@ -1,0 +1,476 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{913708B0-795B-4A8C-B2F8-45BE42F85E13}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataWall</RootNamespace>
+    <AssemblyName>DataWall</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Senparc.CO2NET, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.CO2NET.0.5.2\lib\net45\Senparc.CO2NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.CO2NET.APM, Version=0.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.CO2NET.APM.0.2.4\lib\net45\Senparc.CO2NET.APM.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.NeuChar, Version=0.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.NeuChar.0.6.1\lib\net45\Senparc.NeuChar.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=6.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.6.3.5\lib\net45\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=16.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.16.6.9\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP.MvcExtension, Version=7.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.MVC.7.2.4\lib\net45\Senparc.Weixin.MP.MvcExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Admin\favicon.ico" />
+    <Content Include="Content\Admin\static\images\error.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular1.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular2.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular3.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular4.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular5.jpg" />
+    <Content Include="Content\Admin\static\images\Modular\Modular6.jpg" />
+    <Content Include="Content\Admin\static\images\nophoto.png" />
+    <Content Include="Content\Admin\static\js\Content\contentlist.js" />
+    <Content Include="Content\Admin\static\js\Content\slide.js" />
+    <Content Include="Content\Admin\static\js\Library\add.js" />
+    <Content Include="Content\Admin\static\js\Library\edit.js" />
+    <Content Include="Content\Admin\static\js\Library\libraryuser.js" />
+    <Content Include="Content\Admin\static\js\Library\list.js" />
+    <Content Include="Content\Admin\static\js\login.js" />
+    <Content Include="Content\Admin\static\js\User\add.js" />
+    <Content Include="Content\Admin\static\js\User\edit.js" />
+    <Content Include="Content\Admin\static\js\User\list.js" />
+    <Content Include="Content\Clipboard\clipboard.min.js" />
+    <Content Include="Content\Home\audio\1.mp3" />
+    <Content Include="Content\Home\audio\seeyouagain.mp3" />
+    <Content Include="Content\Home\css\responsive-tabs.css" />
+    <Content Include="Content\Home\css\style.css" />
+    <Content Include="Content\Home\img\1.jpg" />
+    <Content Include="Content\Home\img\2.jpg" />
+    <Content Include="Content\Home\img\3.jpg" />
+    <Content Include="Content\Home\img\4.jpg" />
+    <Content Include="Content\Home\img\5.jpg" />
+    <Content Include="Content\Home\img\6.jpg" />
+    <Content Include="Content\Home\img\7.jpg" />
+    <Content Include="Content\Home\img\back.jpg" />
+    <Content Include="Content\Home\js\jquery-2.2.1.min.js" />
+    <Content Include="Content\Home\js\Luckdraw.js" />
+    <Content Include="Content\Home\js\responsiveTabs.js" />
+    <Content Include="Content\Home\js\responsiveTabs.min.js" />
+    <Content Include="Content\Jquery\1.11.3\jquery.min.js" />
+    <Content Include="Content\layui-formSelects\formSelects-v3.js" />
+    <Content Include="Content\layui-formSelects\formSelects-v4.css" />
+    <Content Include="Content\layui-formSelects\formSelects-v4.js" />
+    <Content Include="Content\layui-formSelects\formSelects-v4.min.js" />
+    <Content Include="Content\Layui\css\layui.css" />
+    <Content Include="Content\Layui\css\layui.mobile.css" />
+    <Content Include="Content\Layui\css\modules\code.css" />
+    <Content Include="Content\Layui\css\modules\laydate\default\laydate.css" />
+    <Content Include="Content\Layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="Content\Layui\css\modules\layer\default\icon.png" />
+    <Content Include="Content\Layui\css\modules\layer\default\layer.css" />
+    <Content Include="Content\Layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="Content\Layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="Content\Layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Content\Layui\font\iconfont.svg" />
+    <Content Include="Content\Layui\images\face\0.gif" />
+    <Content Include="Content\Layui\images\face\1.gif" />
+    <Content Include="Content\Layui\images\face\10.gif" />
+    <Content Include="Content\Layui\images\face\11.gif" />
+    <Content Include="Content\Layui\images\face\12.gif" />
+    <Content Include="Content\Layui\images\face\13.gif" />
+    <Content Include="Content\Layui\images\face\14.gif" />
+    <Content Include="Content\Layui\images\face\15.gif" />
+    <Content Include="Content\Layui\images\face\16.gif" />
+    <Content Include="Content\Layui\images\face\17.gif" />
+    <Content Include="Content\Layui\images\face\18.gif" />
+    <Content Include="Content\Layui\images\face\19.gif" />
+    <Content Include="Content\Layui\images\face\2.gif" />
+    <Content Include="Content\Layui\images\face\20.gif" />
+    <Content Include="Content\Layui\images\face\21.gif" />
+    <Content Include="Content\Layui\images\face\22.gif" />
+    <Content Include="Content\Layui\images\face\23.gif" />
+    <Content Include="Content\Layui\images\face\24.gif" />
+    <Content Include="Content\Layui\images\face\25.gif" />
+    <Content Include="Content\Layui\images\face\26.gif" />
+    <Content Include="Content\Layui\images\face\27.gif" />
+    <Content Include="Content\Layui\images\face\28.gif" />
+    <Content Include="Content\Layui\images\face\29.gif" />
+    <Content Include="Content\Layui\images\face\3.gif" />
+    <Content Include="Content\Layui\images\face\30.gif" />
+    <Content Include="Content\Layui\images\face\31.gif" />
+    <Content Include="Content\Layui\images\face\32.gif" />
+    <Content Include="Content\Layui\images\face\33.gif" />
+    <Content Include="Content\Layui\images\face\34.gif" />
+    <Content Include="Content\Layui\images\face\35.gif" />
+    <Content Include="Content\Layui\images\face\36.gif" />
+    <Content Include="Content\Layui\images\face\37.gif" />
+    <Content Include="Content\Layui\images\face\38.gif" />
+    <Content Include="Content\Layui\images\face\39.gif" />
+    <Content Include="Content\Layui\images\face\4.gif" />
+    <Content Include="Content\Layui\images\face\40.gif" />
+    <Content Include="Content\Layui\images\face\41.gif" />
+    <Content Include="Content\Layui\images\face\42.gif" />
+    <Content Include="Content\Layui\images\face\43.gif" />
+    <Content Include="Content\Layui\images\face\44.gif" />
+    <Content Include="Content\Layui\images\face\45.gif" />
+    <Content Include="Content\Layui\images\face\46.gif" />
+    <Content Include="Content\Layui\images\face\47.gif" />
+    <Content Include="Content\Layui\images\face\48.gif" />
+    <Content Include="Content\Layui\images\face\49.gif" />
+    <Content Include="Content\Layui\images\face\5.gif" />
+    <Content Include="Content\Layui\images\face\50.gif" />
+    <Content Include="Content\Layui\images\face\51.gif" />
+    <Content Include="Content\Layui\images\face\52.gif" />
+    <Content Include="Content\Layui\images\face\53.gif" />
+    <Content Include="Content\Layui\images\face\54.gif" />
+    <Content Include="Content\Layui\images\face\55.gif" />
+    <Content Include="Content\Layui\images\face\56.gif" />
+    <Content Include="Content\Layui\images\face\57.gif" />
+    <Content Include="Content\Layui\images\face\58.gif" />
+    <Content Include="Content\Layui\images\face\59.gif" />
+    <Content Include="Content\Layui\images\face\6.gif" />
+    <Content Include="Content\Layui\images\face\60.gif" />
+    <Content Include="Content\Layui\images\face\61.gif" />
+    <Content Include="Content\Layui\images\face\62.gif" />
+    <Content Include="Content\Layui\images\face\63.gif" />
+    <Content Include="Content\Layui\images\face\64.gif" />
+    <Content Include="Content\Layui\images\face\65.gif" />
+    <Content Include="Content\Layui\images\face\66.gif" />
+    <Content Include="Content\Layui\images\face\67.gif" />
+    <Content Include="Content\Layui\images\face\68.gif" />
+    <Content Include="Content\Layui\images\face\69.gif" />
+    <Content Include="Content\Layui\images\face\7.gif" />
+    <Content Include="Content\Layui\images\face\70.gif" />
+    <Content Include="Content\Layui\images\face\71.gif" />
+    <Content Include="Content\Layui\images\face\8.gif" />
+    <Content Include="Content\Layui\images\face\9.gif" />
+    <Content Include="Content\Layui\layui.all.js" />
+    <Content Include="Content\Layui\layui.js" />
+    <Content Include="Content\Layui\lay\modules\carousel.js" />
+    <Content Include="Content\Layui\lay\modules\code.js" />
+    <Content Include="Content\Layui\lay\modules\colorpicker.js" />
+    <Content Include="Content\Layui\lay\modules\element.js" />
+    <Content Include="Content\Layui\lay\modules\flow.js" />
+    <Content Include="Content\Layui\lay\modules\form.js" />
+    <Content Include="Content\Layui\lay\modules\jquery.js" />
+    <Content Include="Content\Layui\lay\modules\laydate.js" />
+    <Content Include="Content\Layui\lay\modules\layedit.js" />
+    <Content Include="Content\Layui\lay\modules\layer.js" />
+    <Content Include="Content\Layui\lay\modules\laypage.js" />
+    <Content Include="Content\Layui\lay\modules\laytpl.js" />
+    <Content Include="Content\Layui\lay\modules\mobile.js" />
+    <Content Include="Content\Layui\lay\modules\rate.js" />
+    <Content Include="Content\Layui\lay\modules\slider.js" />
+    <Content Include="Content\Layui\lay\modules\table.js" />
+    <Content Include="Content\Layui\lay\modules\tree.js" />
+    <Content Include="Content\Layui\lay\modules\upload.js" />
+    <Content Include="Content\Layui\lay\modules\util.js" />
+    <Content Include="Content\PagedList\PagedList.css" />
+    <Content Include="Content\wangEditor\wangEditor.css" />
+    <Content Include="Content\wangEditor\wangEditor.js" />
+    <Content Include="Content\wangEditor\wangEditor.min.css" />
+    <Content Include="Content\wangEditor\wangEditor.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\wangEditor\fonts\w-e-icon.woff" />
+    <Content Include="Content\wangEditor\wangEditor.min.js.map" />
+    <Content Include="Content\Layui\font\iconfont.eot" />
+    <Content Include="Content\Layui\font\iconfont.ttf" />
+    <Content Include="Content\Layui\font\iconfont.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Content\Admin\static\css\font.css" />
+    <Content Include="Content\Admin\static\css\weadmin.css" />
+    <Content Include="Content\Admin\static\fonts\iconfont.svg" />
+    <Content Include="Content\Admin\static\images\aiwrap.png" />
+    <Content Include="Content\Admin\static\images\bg.png" />
+    <Content Include="Content\Admin\static\images\mapico1.png" />
+    <Content Include="Content\Admin\static\images\mapico2.png" />
+    <Content Include="Content\Admin\static\images\mapico3.png" />
+    <Content Include="Content\Admin\static\images\mapico4.png" />
+    <Content Include="Content\Admin\static\js\admin.js" />
+    <Content Include="Content\Admin\static\js\eleDel.js" />
+    <Content Include="Content\Admin\static\js\extends\tabmenu.js" />
+    <Content Include="Content\Admin\static\js\weadmin.js" />
+    <None Include="Content\SignalR\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Content\SignalR\jquery-1.6.4.js" />
+    <Content Include="Content\SignalR\jquery-1.6.4.min.js" />
+    <Content Include="Content\SignalR\jquery.signalR-2.4.0.js" />
+    <Content Include="Content\SignalR\jquery.signalR-2.4.0.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\admin_routing.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\ContentController.cs" />
+    <Compile Include="Controllers\Admin\LibraryController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\Admin\UserController.cs" />
+    <Compile Include="Controllers\Home\HomeController.cs" />
+    <Compile Include="Controllers\WebApi\ApiController.cs" />
+    <Compile Include="Controllers\WeChat\Weixin.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Migrationss\Configurations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR\MyHub.cs" />
+    <Compile Include="ViewModels\SearchInfo.cs" />
+    <Compile Include="ViewModels\SystemInfo.cs" />
+    <Compile Include="ViewModels\WXModel.cs" />
+    <Compile Include="WeCaht\CustomMessageContext.cs" />
+    <Compile Include="WeCaht\CustomMessageHandler.cs" />
+    <Compile Include="WeCaht\CustomMessageHandler_Events.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Content\Admin\static\css\weadmin.less" />
+    <Content Include="Content\Admin\static\fonts\iconfont.eot" />
+    <Content Include="Content\Admin\static\fonts\iconfont.ttf" />
+    <Content Include="Content\Admin\static\fonts\iconfont.woff" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\User\list.cshtml" />
+    <Content Include="Views\Admin\Welcome.cshtml" />
+    <Content Include="Views\Admin\User\useredit.cshtml" />
+    <Content Include="Views\Admin\User\useradd.cshtml" />
+    <Content Include="Views\Error\ErrorLoginTimeout.cshtml" />
+    <Content Include="Views\Admin\User\pwdedit.cshtml" />
+    <Content Include="Views\Admin\Library\list.cshtml" />
+    <Content Include="Views\Admin\Library\libraryadd.cshtml" />
+    <Content Include="Views\Admin\Library\libraryedit.cshtml" />
+    <Content Include="Views\Admin\Library\libraryuser.cshtml" />
+    <Content Include="Views\Admin\Content\contentlist.cshtml" />
+    <Content Include="Views\Admin\Content\Slide\slideadd.cshtml" />
+    <Content Include="Views\Admin\Content\Slide\slideedit.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Join.cshtml" />
+    <Content Include="Views\Home\UserInfoCallback.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{27462e4d-57ac-4b68-9e1c-e9ff3ccb6abc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{32f9d7e4-7c19-462b-b205-c44150b62eee}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{c778b5f5-03fe-49dd-8d6c-2e2ee21c2df8}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55901</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55901/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
